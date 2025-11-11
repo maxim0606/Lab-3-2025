@@ -91,15 +91,19 @@ public class LinkedListTabulatedFunction implements TabulatedFunction{
                 double point_x2 = currNode.getNext().getPoint().getCoorX();
                 double point_y2 = currNode.getNext().getPoint().getCoorY();
 
-                if ((largeThan(x, point_x1) || equal(x, point_x1))  && largeThan(point_x2, x)) { // Если x входит в определённый отрезок
+                if (equal(x, point_x1)){
+                    return point_y1;
+                }
+
+                if (equal(x, point_x2)){
+                    return point_y2;
+                }
+
+                if ((largeThan(x, point_x1))  && largeThan(point_x2, x)) { // Если x входит в определённый отрезок
                     return interpolate(x, point_x1, point_y1, point_x2,point_y2);
                 }
 
                 currNode = currNode.getNext();
-            }
-
-            if (equal(x, currNode.getPoint().getCoorX())) { // Если x является правой границей интервала
-                return currNode.getPoint().getCoorY();
             }
 
             return Double.NaN;
